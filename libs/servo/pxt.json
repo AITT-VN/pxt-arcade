@@ -1,7 +1,18 @@
 {
-    "additionalFilePath": "../../node_modules/pxt-common-packages/libs/servo",
+    "name": "servo",
+    "description": "A micro-servo library",
+    "files": [
+        "README.md",
+        "servo.ts",
+        "ns.ts",
+        "targetoverrides.ts"
+    ],
+    "public": true,
     "dependencies": {
-        "core": "file:../core",
-        "edge-connector": "file:../edge-connector"
-    }
+        "core": "file:../core"
+    },
+    "additionalFilePath": "../../node_modules/pxt-common-packages/libs/servo",
+    "additionalFilePaths": [
+        "../../node_modules/pxt-common-packages/libs/servo"
+    ]
 }

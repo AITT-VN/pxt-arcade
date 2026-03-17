@@ -1,4 +1,20 @@
 {
+    "name": "mqtt",
+    "description": "MQTT for MakeCode - beta",
+    "files": [
+        "README.md",
+        "mqtt.ts"
+    ],
+    "tests": [
+        "test.ts"
+    ],
+    "public": true,
+    "dependencies": {
+        "core": "file:../core",
+        "net": "file:../net"
+    },
     "additionalFilePath": "../../node_modules/pxt-common-packages/libs/mqtt",
-    "hidden": true
+    "additionalFilePaths": [
+        "../../node_modules/pxt-common-packages/libs/mqtt"
+    ]
 }

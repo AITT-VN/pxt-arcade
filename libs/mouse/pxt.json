@@ -1,4 +1,27 @@
 {
+    "name": "mouse",
+    "description": "Mouse emulation over HID",
+    "files": [
+        "mouse.cpp",
+        "shims.d.ts",
+        "enums.d.ts",
+        "mouse.ts"
+    ],
+    "tests": [
+        "test.ts"
+    ],
+    "public": true,
+    "dependencies": {
+        "core": "file:../core"
+    },
+    "yotta": {
+        "config": {
+            "DEVICE_USB": 1,
+            "DEVICE_MOUSE": 1
+        }
+    },
     "additionalFilePath": "../../node_modules/pxt-common-packages/libs/mouse",
-    "searchOnly": true
+    "additionalFilePaths": [
+        "../../node_modules/pxt-common-packages/libs/mouse"
+    ]
 }

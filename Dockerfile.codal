@@ -1,0 +1,27 @@
+FROM ubuntu:20.04
+
+# Avoid interactive prompts
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Install dependencies for Codal build (Python 3, CMake, Ninja, GCC ARM)
+RUN apt-get update && apt-get install -y \
+    python3 \
+    python3-pip \
+    cmake \
+    ninja-build \
+    git \
+    make \
+    gcc-arm-none-eabi \
+    libssl-dev \
+    libusb-1.0-0-dev \
+    python-is-python3 \
+    && rm -rf /var/lib/apt/lists/*
+
+# Create 'build' user
+RUN useradd -m -d /home/build -s /bin/bash build
+
+# Set working directory
+WORKDIR /src
+
+# Verify versions
+RUN python3 --version && cmake --version && arm-none-eabi-gcc --version

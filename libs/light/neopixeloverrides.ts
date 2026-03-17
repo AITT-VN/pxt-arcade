@@ -1,4 +1,1 @@
-//% weight=97
-namespace light {
-
-}
+// replace in other targets

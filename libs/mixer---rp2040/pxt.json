@@ -1,3 +1,7 @@
 {
-    "additionalFilePath": "../../node_modules/pxt-common-packages/libs/mixer---rp2040"
+    "name": "mixer---rp2040",
+    "additionalFilePath": "../../node_modules/pxt-common-packages/libs/mixer---rp2040",
+    "additionalFilePaths": [
+        "../../node_modules/pxt-common-packages/libs/mixer---rp2040"
+    ]
 }

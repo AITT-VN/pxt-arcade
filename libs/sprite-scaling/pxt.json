@@ -1,4 +1,20 @@
 {
+    "name": "sprite-scaling",
+    "description": "Additional scaling blocks for sprites",
+    "files": [
+        "README.md",
+        "scaling.ts",
+        "targetoverrides.ts"
+    ],
+    "testFiles": [
+        "test.ts"
+    ],
+    "public": true,
+    "dependencies": {
+        "game": "file:../game"
+    },
     "additionalFilePath": "../../node_modules/pxt-common-packages/libs/sprite-scaling",
-    "weight": 80
+    "additionalFilePaths": [
+        "../../node_modules/pxt-common-packages/libs/sprite-scaling"
+    ]
 }

@@ -1,4 +1,22 @@
 {
+    "name": "lightsensor",
+    "description": "Onboard light level sensor",
+    "files": [
+        "README.md",
+        "lightsensor.cpp",
+        "ns.ts",
+        "shims.d.ts",
+        "enums.d.ts"
+    ],
+    "testFiles": [
+        "test.ts"
+    ],
+    "public": true,
+    "dependencies": {
+        "core": "file:../core"
+    },
     "additionalFilePath": "../../node_modules/pxt-common-packages/libs/lightsensor",
-    "hidden": true
+    "additionalFilePaths": [
+        "../../node_modules/pxt-common-packages/libs/lightsensor"
+    ]
 }

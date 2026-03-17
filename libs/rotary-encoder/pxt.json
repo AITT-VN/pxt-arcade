@@ -1,4 +1,20 @@
 {
+    "name": "rotary-encoder",
+    "description": "Driver for rotary encoder",
+    "files": [
+        "rotary.cpp",
+        "enums.d.ts",
+        "shims.d.ts",
+        "ns.ts",
+        "targetoverrides.ts",
+        "README.md"
+    ],
+    "public": true,
+    "dependencies": {
+        "core": "file:../core"
+    },
     "additionalFilePath": "../../node_modules/pxt-common-packages/libs/rotary-encoder",
-    "hidden": true
+    "additionalFilePaths": [
+        "../../node_modules/pxt-common-packages/libs/rotary-encoder"
+    ]
 }

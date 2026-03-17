@@ -1,3 +1,11 @@
 {
-    "additionalFilePath": "../../node_modules/pxt-common-packages/libs/controller---none"
+    "name": "controller---none",
+    "additionalFilePath": "../../node_modules/pxt-common-packages/libs/controller---none",
+    "dependencies": {
+        "core": "file:../core",
+        "game": "file:../game"
+    },
+    "additionalFilePaths": [
+        "../../node_modules/pxt-common-packages/libs/controller---none"
+    ]
 }

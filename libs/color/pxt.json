@@ -1,4 +1,18 @@
 {
+    "name": "color",
+    "description": "Color manipulation",
+    "files": [
+        "colors.ts",
+        "colorbuffer.ts",
+        "README.md"
+    ],
+    "public": true,
+    "weight": 1,
+    "dependencies": {
+        "core": "file:../core"
+    },
     "additionalFilePath": "../../node_modules/pxt-common-packages/libs/color",
-    "searchOnly": true
+    "additionalFilePaths": [
+        "../../node_modules/pxt-common-packages/libs/color"
+    ]
 }

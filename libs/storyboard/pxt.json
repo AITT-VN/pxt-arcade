@@ -1,5 +1,23 @@
 {
+    "name": "storyboard",
+    "description": "Scene manager",
+    "files": [
+        "storyboard.ts",
+        "loader.ts",
+        "README.md"
+    ],
+    "testFiles": [
+        "test.ts"
+    ],
+    "public": true,
+    "weight": 10,
+    "dependencies": {
+        "game": "file:../game",
+        "color": "file:../color",
+        "palette": "file:../palette"
+    },
     "additionalFilePath": "../../node_modules/pxt-common-packages/libs/storyboard",
-    "searchOnly": true,
-    "weight": 81
+    "additionalFilePaths": [
+        "../../node_modules/pxt-common-packages/libs/storyboard"
+    ]
 }

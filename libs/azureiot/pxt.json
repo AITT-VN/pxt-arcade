@@ -1,4 +1,23 @@
 {
+    "name": "azureiot",
+    "description": "Azure IoT - beta",
+    "files": [
+        "azureiot.ts",
+        "README.md"
+    ],
+    "testFiles": [
+        "test.ts"
+    ],
+    "public": true,
+    "dependencies": {
+        "mqtt": "file:../mqtt",
+        "settings": "file:../settings"
+    },
+    "testDependencies": {
+        "esp32": "file:../esp32"
+    },
     "additionalFilePath": "../../node_modules/pxt-common-packages/libs/azureiot",
-    "hidden": true
+    "additionalFilePaths": [
+        "../../node_modules/pxt-common-packages/libs/azureiot"
+    ]
 }

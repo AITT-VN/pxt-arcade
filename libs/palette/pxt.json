@@ -1,5 +1,21 @@
 {
+    "name": "palette",
+    "description": "Palette manipulations",
+    "files": [
+        "palette.ts",
+        "README.md"
+    ],
+    "testFiles": [
+        "test.ts"
+    ],
+    "public": true,
+    "weight": 10,
+    "dependencies": {
+        "color": "file:../color",
+        "game": "file:../game"
+    },
     "additionalFilePath": "../../node_modules/pxt-common-packages/libs/palette",
-    "searchOnly": true,
-    "weight": 75
+    "additionalFilePaths": [
+        "../../node_modules/pxt-common-packages/libs/palette"
+    ]
 }

@@ -1,3 +1,7 @@
 {
-    "additionalFilePath": "../../node_modules/pxt-common-packages/libs/screen---linux"
+    "name": "screen---linux",
+    "additionalFilePath": "../../node_modules/pxt-common-packages/libs/screen---linux",
+    "additionalFilePaths": [
+        "../../node_modules/pxt-common-packages/libs/screen---linux"
+    ]
 }

@@ -1,4 +1,28 @@
 {
-    "additionalFilePath": "../../node_modules/pxt-common-packages/libs/keyboard",
-    "searchOnly": true
+    "name": "keyboard",
+    "description": "Keyboard emulation over HID",
+    "files": [
+        "keyboard.cpp",
+        "shims.d.ts",
+        "enums.d.ts",
+        "keyboard.ts"
+    ],
+    "tests": [
+        "test.ts"
+    ],
+    "public": true,
+    "dependencies": {
+        "core": "file:../core",
+        "game": "file:../game"
+    },
+    "yotta": {
+        "config": {
+            "DEVICE_USB": 1,
+            "DEVICE_KEYBOARD": 1
+        }
+    },
+    "additionalFilePath": "../../../pxt-common-packages/libs/keyboard",
+    "additionalFilePaths": [
+        "../../../pxt-common-packages/libs/keyboard"
+    ]
 }

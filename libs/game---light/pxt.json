@@ -1,3 +1,25 @@
 {
-    "additionalFilePath": "../../node_modules/pxt-common-packages/libs/game---light"
+    "name": "game---light",
+    "description": "Empty game library - beta",
+    "files": [
+        "compat.ts",
+        "console.ts",
+        "constants.ts",
+        "controlleroverrides.ts",
+        "controllerbutton.ts",
+        "controllerbuttons.cpp",
+        "mathUtil.ts",
+        "gameutil.ts",
+        "targetoverrides.cpp",
+        "targetoverrides.ts"
+    ],
+    "public": true,
+    "additionalFilePath": "../../node_modules/pxt-common-packages/libs/game---light",
+    "dependencies": {
+        "settings": "file:../settings",
+        "screen": "file:../screen"
+    },
+    "additionalFilePaths": [
+        "../../node_modules/pxt-common-packages/libs/game---light"
+    ]
 }

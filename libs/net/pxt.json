@@ -1,4 +1,21 @@
 {
+    "name": "net",
+    "description": "Networking abstractions",
+    "files": [
+        "README.md",
+        "controller.ts",
+        "controllersocket.ts",
+        "net.ts",
+        "netutil.ts",
+        "requests.ts"
+    ],
+    "public": true,
+    "dependencies": {
+        "core": "file:../core",
+        "settings": "file:../settings"
+    },
     "additionalFilePath": "../../node_modules/pxt-common-packages/libs/net",
-    "hidden": true
+    "additionalFilePaths": [
+        "../../node_modules/pxt-common-packages/libs/net"
+    ]
 }

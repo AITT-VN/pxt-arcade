@@ -1,3 +1,16 @@
 {
-    "additionalFilePath": "../../node_modules/pxt-common-packages/libs/power"
+    "name": "power",
+    "description": "Power and sleep management",
+    "files": [
+        "power.ts"
+    ],
+    "testFiles": [],
+    "public": true,
+    "dependencies": {
+        "core": "file:../core"
+    },
+    "additionalFilePath": "../../node_modules/pxt-common-packages/libs/power",
+    "additionalFilePaths": [
+        "../../node_modules/pxt-common-packages/libs/power"
+    ]
 }

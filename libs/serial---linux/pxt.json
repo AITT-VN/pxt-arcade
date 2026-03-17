@@ -1,4 +1,7 @@
 {
+    "name": "serial---linux",
     "additionalFilePath": "../../node_modules/pxt-common-packages/libs/serial---linux",
-    "hidden": true
+    "additionalFilePaths": [
+        "../../node_modules/pxt-common-packages/libs/serial---linux"
+    ]
 }

@@ -1,4 +1,20 @@
 {
+    "name": "animation",
+    "description": "Advanced state based animations for sprites",
+    "files": [
+        "README.md",
+        "legacy.ts",
+        "targetoverrides.ts"
+    ],
+    "testFiles": [
+        "test.ts"
+    ],
+    "public": true,
+    "dependencies": {
+        "game": "file:../game"
+    },
     "additionalFilePath": "../../node_modules/pxt-common-packages/libs/animation",
-    "weight": 80
+    "additionalFilePaths": [
+        "../../node_modules/pxt-common-packages/libs/animation"
+    ]
 }

@@ -1,3 +1,7 @@
 {
-    "additionalFilePath": "../../node_modules/pxt-common-packages/libs/screen---ext"
+    "name": "screen---ext",
+    "additionalFilePath": "../../node_modules/pxt-common-packages/libs/screen---ext",
+    "additionalFilePaths": [
+        "../../node_modules/pxt-common-packages/libs/screen---ext"
+    ]
 }

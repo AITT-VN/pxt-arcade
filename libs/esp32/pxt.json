@@ -1,4 +1,22 @@
 {
+    "name": "esp32",
+    "description": "ESP32 over SPI - beta",
+    "files": [
+        "net.ts",
+        "ninacontroller.ts",
+        "README.md"
+    ],
+    "testFiles": [
+        "test.ts"
+    ],
+    "public": true,
+    "dependencies": {
+        "core": "file:../core",
+        "net": "file:../net",
+        "settings": "file:../settings"
+    },
     "additionalFilePath": "../../node_modules/pxt-common-packages/libs/esp32",
-    "hidden": true
+    "additionalFilePaths": [
+        "../../node_modules/pxt-common-packages/libs/esp32"
+    ]
 }

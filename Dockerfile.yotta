@@ -1,0 +1,44 @@
+FROM ubuntu:18.04
+
+# Avoid interactive prompts during package installation
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Update apt repositories and install dependencies
+# yotta requires python2.7 and python-pip
+# cmake, ninja-build, srecord, git, make are build tools
+# gcc-arm-none-eabi is the compiler (version in 18.04 is usually adequate for older yotta builds)
+RUN apt-get update && apt-get install -y \
+    python2.7 \
+    python-pip \
+    python3 \
+    python3-pip \
+    cmake \
+    ninja-build \
+    srecord \
+    git \
+    make \
+    gcc-arm-none-eabi \
+    libffi-dev \
+    libssl-dev \
+    libusb-1.0-0-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# Upgrade pip and setuptools to versions compatible with Python 2.7
+RUN pip install --upgrade "pip < 21.0" "setuptools < 45.0"
+
+# Fix for some python cryptography issues on old builds:
+RUN pip install "cryptography<3.4"
+
+# Install yotta
+RUN pip install yotta
+
+# Create 'build' user for pxt compatibility
+RUN useradd -m -d /home/build -s /bin/bash build
+
+# Set the working directory
+WORKDIR /workspace
+
+# Verify installation
+RUN yotta --version && arm-none-eabi-gcc --version
+
+CMD ["yotta"]

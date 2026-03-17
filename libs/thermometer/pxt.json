@@ -1,4 +1,23 @@
 {
+    "name": "thermometer",
+    "description": "A thermometer driver",
+    "files": [
+        "README.md",
+        "temperature.cpp",
+        "target_temperature.h",
+        "shims.d.ts",
+        "enums.d.ts",
+        "ns.ts"
+    ],
+    "testFiles": [
+        "test.ts"
+    ],
+    "public": true,
+    "dependencies": {
+        "core": "file:../core"
+    },
     "additionalFilePath": "../../node_modules/pxt-common-packages/libs/thermometer",
-    "hidden": true
+    "additionalFilePaths": [
+        "../../node_modules/pxt-common-packages/libs/thermometer"
+    ]
 }
