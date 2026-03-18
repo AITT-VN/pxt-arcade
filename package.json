@@ -38,6 +38,8 @@
         "pxt-arcade-sim": "microsoft/pxt-arcade-sim.git#v0.12.3"
     },
     "scripts": {
+        "copy-locales": "node ./scripts/copyLocales.js",
+        "preserve": "node ./scripts/copyLocales.js",
         "serve": "node node_modules/pxt-core/built/pxt.js serve",
         "copy-sim": "node ./scripts/copyArcadeSim.js",
         "compile-aw": "gh aw compile --strict"

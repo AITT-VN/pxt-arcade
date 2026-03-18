@@ -1,4 +1,4 @@
-# JavaScript Games
+# Trò chơi JavaScript
 
 Here are some fun programs for your @boardname@!
 

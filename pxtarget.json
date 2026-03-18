@@ -3,52 +3,19 @@
     "defaultLocale": "vi",
     "name": "arcade",
     "nickname": "arcade",
-    "thumbnailName": "MakeCode Arcade",
-    "title": "Microsoft MakeCode Arcade",
+    "thumbnailName": "GameLab",
+    "title": "GameLab",
     "description": "Develop your programming skills by quickly creating and modding retro arcade games with Blocks and JavaScript in the MakeCode editor",
     "corepkg": "device",
     "cloud": {
         "workspace": false,
         "sharing": true,
         "thumbnails": true,
-        "importing": true,
+        "importing": false,
         "packages": true,
         "publishing": true,
         "githubPackages": true,
-        "showBadges": true,
-        "cloudProviders": {
-            "github": {
-                "id": "github",
-                "name": "GitHub",
-                "icon": "/static/providers/github-mark.png",
-                "identity": false,
-                "order": 4
-            },
-            "microsoft": {
-                "id": "microsoft",
-                "name": "Microsoft",
-                "icon": "/static/providers/microsoft-logo.svg",
-                "identity": true,
-                "redirect": true,
-                "order": 1
-            },
-            "google": {
-                "id": "google",
-                "name": "Google",
-                "icon": "/static/providers/google-logo.svg",
-                "identity": true,
-                "redirect": true,
-                "order": 2
-            },
-            "clever": {
-                "id": "clever",
-                "name": "Clever",
-                "icon": "/static/providers/clever-logo.png",
-                "identity": true,
-                "redirect": true,
-                "order": 3
-            }
-        }
+        "showBadges": true
     },
     "bundleddirs": [
         "libs/animation",
@@ -400,20 +367,19 @@
         "logo": "/static/logo.svg",
         "docsLogo": "/static/logo.svg",
         "cardLogo": "/static/logo.png",
-        "appLogo": "/static/icons/favicon.ico",
+        "appLogo": "/static/legacy-logo.svg",
         "portraitLogo": "/static/logo.svg",
         "footerLogo": "/static/logo.svg",
         "organization": "OhStem",
-        "organizationText": "MakeCode Arcade",
-        "organizationShortText": "MakeCode",
+        "organizationText": "GameLab",
+        "organizationShortText": "GameLab",
         "organizationUrl": "https://ohstem.vn",
         "organizationLogo": "/static/logo.png",
         "organizationWideLogo": "/static/logo.png",
         "homeUrl": "https://arcade.makecode.com/",
         "embedUrl": "https://arcade.makecode.com/",
-        "privacyUrl": "https://go.microsoft.com/fwlink/?LinkId=521839",
-        "termsOfUseUrl": "https://go.microsoft.com/fwlink/?LinkID=206977",
         "githubUrl": "https://github.com/microsoft/pxt-arcade",
+        "copyrightText": "Powered by MakeCode Arcade",
         "boardName": "Arcade",
         "addNewTypeScriptFile": true,
         "docMenu": [
@@ -448,12 +414,8 @@
         "hasAudio": true,
         "allowPackageExtensions": true,
         "homeScreenHero": {
-            "imageUrl": "/static/hero-gallery/multiplayer-banner.png",
-            "name": "Multiplayer Games!",
-            "url": "/--multiplayer",
-            "buttonLabel": "Try Now",
-            "description": "Multiplayer Games!",
-            "cardType": "link"
+            "imageUrl": "/static/hero-gallery/adventure.png",
+            "cardType": "image"
         },
         "homeScreenHeroGallery": "/hero-banner",
         "socialOptions": {
@@ -493,6 +455,7 @@
             "soundeffect-editor",
             "music-editor"
         ],
+        "homeScreenHeroGallery": "/hero-gallery",
         "scriptManager": true,
         "saveInMenu": false,
         "debugger": true,
