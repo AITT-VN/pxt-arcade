@@ -62,7 +62,7 @@
         "libs/screen",
         "libs/screen---ext",
         "libs/screen---st7735",
-        "libs/serial",
+
         "libs/servo",
         "libs/settings",
         "libs/settings---files",
@@ -93,7 +93,7 @@
             "libs/palette",
             "libs/radio",
             "libs/radio-broadcast",
-            "libs/serial",
+
             "libs/servo",
             "libs/settings",
             "libs/sevenseg",
