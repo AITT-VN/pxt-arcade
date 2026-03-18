@@ -271,9 +271,10 @@ canvas {
 .game-player-msft:before {
     background-size: contain;
     background-repeat: no-repeat;
+    background-position: center;
 
-    height: 1rem;
-    width: 4.7rem;
+    height: 2.5rem;
+    width: 2.3rem;
     display: inline-block;
     vertical-align: middle;
     content: "";
