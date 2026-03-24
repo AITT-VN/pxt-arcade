@@ -41,6 +41,10 @@ Use the [button tester](/developer/button-tester) to verify the proper button as
 
 To get help, you can ask the [MakeCode community](https://aka.ms/makecodecommunity) at/on our public discord channel for arcade.
 
+## Deployment
+
+Documentation on how to build and deploy OhStem MakeCode Arcade to AWS S3 & CloudFront can be found [here](/deploy).
+
 ## Bugs and Features
 
 Please report all bugs and feature requests to [pxt-arcade](https://github.com/microsoft/pxt-arcade/issues).

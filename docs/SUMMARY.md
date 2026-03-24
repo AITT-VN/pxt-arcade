@@ -74,3 +74,4 @@
     * [Blocks Embed](/blocks-embed)
     * [Art, images, colors](/developer/images)
     * [Sounds](/developer/sound)
+    * [Deployment Guide](/deploy)
