@@ -43,6 +43,6 @@
         "serve": "node node_modules/pxt-core/built/pxt.js serve",
         "copy-sim": "node ./scripts/copyArcadeSim.js",
         "compile-aw": "gh aw compile --strict",
-        "deploy": "cmd /c \"if exist built\\packaged\\static rmdir /s /q built\\packaged\\static\" && aws s3 sync built/packaged s3://gamelab.ohstem.vn/ --delete && aws cloudfront create-invalidation --distribution-id E26OB3OVA7KBC6 --paths \"/*\""
+        "deploy": "cmd /c \"if exist built\\packaged\\static rmdir /s /q built\\packaged\\static\" && aws --profile ohstem s3 sync built/packaged s3://gamelab.ohstem.vn/ --delete && aws --profile ohstem cloudfront create-invalidation --distribution-id E26OB3OVA7KBC6 --paths \"/*\""
     }
 }
