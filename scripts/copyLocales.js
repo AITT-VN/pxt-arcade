@@ -1,14 +1,21 @@
 /**
- * Copy custom locale files from /locales to /built/packaged/locales
- * This ensures Vietnamese (and any future) translations persist across builds.
- * 
+ * Copy custom locale files from /locales to:
+ *   - /built/packaged/locales  (packaged build, served via --pkg mode)
+ *   - /built/locales           (dev server, served via `pxt serve`)
+ *
+ * The pxt dev server (non-packaged mode) searches in dirs[] which includes
+ * "built/" but NOT "built/packaged/", so we need to copy to both destinations.
+ *
  * Usage: node scripts/copyLocales.js
  */
 const fs = require("fs");
 const path = require("path");
 
 const srcDir = path.join(__dirname, "..", "locales");
-const destDir = path.join(__dirname, "..", "built", "packaged", "locales");
+const destDirs = [
+    path.join(__dirname, "..", "built", "packaged", "locales"),
+    path.join(__dirname, "..", "built", "locales"),
+];
 
 function copyRecursive(src, dest) {
     if (!fs.existsSync(src)) {
@@ -32,5 +39,7 @@ function copyRecursive(src, dest) {
     }
 }
 
-copyRecursive(srcDir, destDir);
+for (const destDir of destDirs) {
+    copyRecursive(srcDir, destDir);
+}
 console.log("[copy-locales] Done.");

@@ -18,7 +18,8 @@
         "sequencer.ts",
         "playable.ts",
         "pxtparts.json",
-        "headphone.svg"
+        "headphone.svg",
+        "_locales/vi/mixer-strings.json"
     ],
     "public": true,
     "dependencies": {

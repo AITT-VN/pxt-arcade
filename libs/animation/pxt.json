@@ -4,7 +4,8 @@
     "files": [
         "README.md",
         "legacy.ts",
-        "targetoverrides.ts"
+        "targetoverrides.ts",
+        "_locales/vi/animation-strings.json"
     ],
     "testFiles": [
         "test.ts"

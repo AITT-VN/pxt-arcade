@@ -1,6 +1,4 @@
 {
-  "arcade": "Arcade",
-  "{id:game-title}Galga": "Galga (Tiếng Việt)",
   "Array._pickRandom|block": "lấy giá trị ngẫu nhiên từ %list",
   "Array._popStatement|block": "xóa phần tử cuối khỏi %list",
   "Array._removeAtStatement|block": "%list | xóa phần tử tại vị trí %index",
@@ -571,9 +569,6 @@
   "{id:group}Tilemaps": "Bản đồ ô",
   "{id:group}Tone": "Nốt nhạc",
   "{id:group}Volume": "Âm lượng",
-  "absolute of %1": "giá trị tuyệt đối của %1",
-  "remainder of %1 / %2": "phần dư của %1 ÷ %2",
-  "remainder of %1 ÷ %2": "phần dư của %1 ÷ %2",
   "spritescreate|block": "nhân vật %img=screen_image_picker loại %kind=spritekind",
   "spritescreatenoset|block": "nhân vật %img=screen_image_picker loại %kind=spritekind",
   "spritesetvel|block": "đặt vận tốc %sprite(mySprite) thành vx %vx vy %vy",

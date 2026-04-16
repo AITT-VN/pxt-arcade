@@ -35,7 +35,8 @@
         "utfdecoder.ts",
         "scheduling.ts",
         "controlmessage.ts",
-        "perfcounters.ts"
+        "perfcounters.ts",
+        "_locales/vi/base-strings.json"
     ],
     "testFiles": [
         "test.ts"

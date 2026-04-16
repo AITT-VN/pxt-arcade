@@ -57,7 +57,8 @@
         "multiplayer.cpp",
         "multiplayer.ts",
         "keymap.cpp",
-        "keymap.ts"
+        "keymap.ts",
+        "_locales/vi/game-strings.json"
     ],
     "public": true,
     "dependencies": {

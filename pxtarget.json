@@ -62,7 +62,6 @@
         "libs/screen",
         "libs/screen---ext",
         "libs/screen---st7735",
-
         "libs/servo",
         "libs/settings",
         "libs/settings---files",
@@ -93,7 +92,6 @@
             "libs/palette",
             "libs/radio",
             "libs/radio-broadcast",
-
             "libs/servo",
             "libs/settings",
             "libs/sevenseg",
@@ -417,7 +415,7 @@
             "imageUrl": "/static/hero-gallery/adventure.png",
             "cardType": "image"
         },
-        "homeScreenHeroGallery": "/hero-banner",
+        "homeScreenHeroGallery": "/hero-gallery",
         "socialOptions": {
             "orgTwitterHandle": "MSMakeCode",
             "hashtags": "MakeCode",
@@ -445,7 +443,7 @@
         "highContrastColorTheme": "pxt-high-contrast",
         "simAnimationEnter": "fly right in",
         "simAnimationExit": "fly right out",
-        "crowdinProject": "makecode",
+
         "monacoColors": {
             "editor.background": "#F8FAFC"
         },
@@ -455,7 +453,6 @@
             "soundeffect-editor",
             "music-editor"
         ],
-        "homeScreenHeroGallery": "/hero-gallery",
         "scriptManager": true,
         "saveInMenu": false,
         "debugger": true,
@@ -604,5 +601,8 @@
             "type": "skillmap-completion",
             "title": "Shark Splash"
         }
-    ]
+    ],
+    "versions": {
+        "target": "2.1.34"
+    }
 }

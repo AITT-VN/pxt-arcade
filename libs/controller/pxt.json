@@ -11,7 +11,8 @@
         "controller.ts",
         "light.ts",
         "crank.ts",
-        "controllerimpl.ts"
+        "controllerimpl.ts",
+        "_locales/vi/controller-strings.json"
     ],
     "public": true,
     "dependencies": {
