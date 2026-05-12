@@ -1,7 +1,7 @@
 // This file would be usually overridden by the target.
 // set palette before creating screen, so the JS version has the right BPP
 image.setPalette(hex`__palette`)
-const screen = image.create(178, 128) as ScreenImage
+const screen = image.create(160, 120) as ScreenImage
 
 namespace _screen_internal {
     //% shim=pxt::updateScreen

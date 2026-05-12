@@ -165,9 +165,10 @@ canvas {
     left: 0.5rem;
     top: 0.5rem;
     width: calc(100% - 2rem);
+    aspect-ratio: 4 / 3;
+    flex-shrink: 0;
     border: 0.5rem solid var(--sim-button-fill);
     background-color: var(--sim-button-fill);
-    min-height: 58%;
     padding-bottom: 0.5rem;
     display: flex;
     align-items: center;
