@@ -23,5 +23,12 @@
     "additionalFilePath": "../../node_modules/pxt-common-packages/libs/accelerometer",
     "additionalFilePaths": [
         "../../node_modules/pxt-common-packages/libs/accelerometer"
-    ]
+    ],
+    "yotta": {
+        "config": {
+            "PXT_SUPPORT_LIS3DH": 1,
+            "PXT_SUPPORT_MMA8453": 1,
+            "PXT_SUPPORT_MPU6050": 1
+        }
+    }
 }
