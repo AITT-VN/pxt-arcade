@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width,height=device-height,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
+    <title>GameLab</title>
+    <link rel="icon" href="/static/favicon.ico">
+
+    <!-- Cùng bộ style mà trang share gốc (script.html) dùng để bố cục simulator -->
+    <link rel="stylesheet" href="/semantic.css" />
+    <link rel="stylesheet" href="/blockly.css" />
+    <link rel="stylesheet" href="/docfiles/style.css" />
+    <link rel="stylesheet" href="/docfiles/vs.css" />
+    <link rel="stylesheet" href="/docfiles/target.css" />
+    <link rel="stylesheet" href="/docfiles/script-page.css" />
+
+    <script src="/jquery.js"></script>
+    <script src="/semantic.js"></script>
+
+    <style>
+        .ui.item.logo img { object-fit: contain; }
+        .header {
+            align-items: center;
+            background-color: var(--pxt-header-background);
+            color: var(--pxt-header-foreground);
+            display: flex; flex-grow: 0; flex-shrink: 0;
+            height: 4rem; max-height: 4rem; z-index: 50;
+        }
+        .header-left, .header-right { display: flex; align-items: center; height: 100%; }
+        .header-logo { display: flex; align-items: center; }
+        .header-logo img { height: 1.6rem; margin: 0 .6rem 0 1rem; }
+        header {
+            --pxt-header-background: #f76820;
+            --pxt-header-foreground: #ffffff;
+            --pxt-neutral-background1: #ffffff;
+            --pxt-neutral-foreground1: #000000;
+            margin-bottom: 1rem;
+        }
+        .header .brand:before {
+            border-left: 2px solid var(--pxt-header-foreground);
+            content: " "; height: 1.5rem; position: relative;
+        }
+        .header .brand { flex-shrink: 0; height: 100%; display: flex; align-items: center; }
+        .title-text {
+            color: var(--pxt-header-foreground);
+            font-family: Segoe UI, Tahoma, Geneva, Verdana, Helvetica Neue, Helvetica, Arial, sans-serif;
+            font-size: 18px; font-weight: 700; margin-bottom: 1px; margin-left: 1rem;
+            display: inline-block;
+        }
+        .header-left { margin-right: 1rem; }
+        .header-title { flex-grow: 1; text-align: center; }
+        .common-button.menu-button { transition: none; }
+        .common-button.menu-button:hover { background: rgba(0, 0, 0, 0.1); }
+        .abuse.content { text-align: center; font-size: 13px; }
+        #description-modal { z-index: 1001; }
+        #description-modal-dimmer {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(127, 140, 141, .85); z-index: 1000; display: none;
+        }
+        #description-modal-content {
+            font-family: Segoe UI, "Segoe UI Web (West European)", -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
+            font-size: 1rem; background-color: unset;
+        }
+
+        /* ----- Bố cục NGANG, vừa khung, không scroll ----- */
+        html, body#root.share-page {
+            height: 100%; margin: 0; overflow: hidden;
+        }
+        body#root.share-page {
+            display: flex; flex-direction: column;
+        }
+        body#root.share-page > header { flex: 0 0 auto; margin-bottom: 0; }
+        /* vùng giữa chiếm hết chỗ còn lại */
+        .script-content {
+            flex: 1 1 auto; min-height: 0;
+            display: flex; flex-direction: column;
+            margin: 0 !important; padding: 0 !important; width: 100%; max-width: none !important;
+        }
+        #embed-frame {
+            flex: 1 1 auto; min-height: 0; position: relative;
+            display: flex; align-items: center; justify-content: center;
+        }
+        /* Ép simframe lấp đầy khung rộng -> sim iframe thành landscape, controller ngang */
+        #embed-frame .simframe {
+            position: absolute !important; top: 0 !important; left: 0 !important;
+            width: 100% !important; height: 100% !important;
+            padding: 0 !important; margin: 0 !important;
+        }
+        #embed-frame .simframe > iframe {
+            position: absolute !important; top: 0 !important; left: 0 !important;
+            width: 100% !important; height: 100% !important;
+        }
+        /* iframe "Xem code" (#sandbox) cũng phải lấp đầy khung */
+        #embed-frame > iframe, #embed-frame iframe.sim-embed {
+            position: absolute !important; top: 0 !important; left: 0 !important;
+            width: 100% !important; height: 100% !important; border: 0 !important;
+        }
+        .script-bookend { flex: 0 0 auto; }
+        .abuse.content { padding: .35rem; margin: 0; }
+    </style>
+</head>
+
+<body id='root' class='root expandIt share-page'>
+    <header>
+        <div class="common-menubar header" role="menubar" aria-label="Header">
+            <div class="header-left">
+                <div class="header-logo">
+                    <img src="/static/logo.svg" alt="GameLab" onerror="this.style.display='none'" />
+                </div>
+                <div class="ui item logo brand noclick mobile-hidden">
+                    <span class="title-text">GameLab</span>
+                </div>
+            </div>
+            <div class="title-text header-title" id="project-title">&nbsp;</div>
+            <div class="header-right">
+                <button id="show-code-button" class="common-button menu-button mobile-hidden" title="Xem code" role="menuitem">
+                    <span class="common-button-flex"><i class="fas fa-code" aria-hidden="true"></i></span>
+                </button>
+                <a id="editCodeButton" href="#" class="common-button menu-button mobile-hidden" title="Mở trình soạn thảo" role="menuitem">
+                    <span class="common-button-flex"><i class="fas fa-edit" aria-hidden="true"></i></span>
+                </a>
+                <button id="show-description-button" class="common-button menu-button" title="Mô tả" role="menuitem">
+                    <span class="common-button-flex"><i class="fas fa-info-circle" aria-hidden="true"></i></span>
+                </button>
+                <div class="common-menu-dropdown mobile-only">
+                    <button id="overflow-menu" class="common-button menu-button" title="Thêm..." role="menuitem" aria-expanded="false" aria-haspopup="true" aria-controls="overflow-menu-content">
+                        <span class="common-button-flex"><i class="fas fa-bars" aria-hidden="true"></i></span>
+                    </button>
+                    <div id="overflow-menu-content" class="common-menu-dropdown-pane" role="menu" aria-labelledby="overflow-menu" style="display: none;">
+                        <ul role="presentation">
+                            <li role="presentation">
+                                <button id="show-code-button-overflow" class="common-button common-menu-dropdown-item" title="Xem code" role="menuitem">
+                                    <span class="common-button-flex"><span class="common-button-label">Xem code</span></span>
+                                </button>
+                            </li>
+                            <li role="presentation">
+                                <a id="editCodeButton-overflow" href="#" class="common-button common-menu-dropdown-item" title="Mở trình soạn thảo" role="menuitem">
+                                    <span class="common-button-flex"><span class="common-button-label">Mở trình soạn thảo</span></span>
+                                </a>
+                            </li>
+                            <li role="presentation">
+                                <a id="share-eval-button-overflow" href="#" class="common-button common-menu-dropdown-item" style="display:none" title="Đánh giá" role="menuitem">
+                                    <span class="common-button-flex"><span class="common-button-label">Đánh giá</span></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="ui main mainbody script-content">
+        <div id="embed-frame">
+            <div id="loader" style="text-align:center;margin:20% auto;font-family:monospace;font-size:25px;">đang tải…</div>
+        </div>
+
+        <div class="script-bookend">
+            <div class="abuse content">
+                <p>Nội dung do người dùng tạo và chia sẻ qua GameLab.</p>
+            </div>
+
+            <div id="description-modal-dimmer"></div>
+            <div class="ui modal" id="description-modal" style="transform: translate(-50%, -50%)">
+                <div class="header">Mô tả dự án</div>
+                <div class="content" style="max-height: 50vh; overflow-y: auto;">
+                    <pre id="description-modal-content" style="white-space: pre-wrap"></pre>
+                </div>
+                <div class="actions">
+                    <div id="description-modal-ok" class="ui ok green button" tabindex="0">OK</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- webConfig tĩnh (giống run.html) — cần cho embed.js/runner -->
+    <script>
+        // Bộ config ĐẦY ĐỦ, lấy nguyên văn từ run.html (build tĩnh) để embed.js
+        // tính đúng các URL (đặc biệt isStatic + simUrl). Nếu đổi targetVersion/
+        // pxtVersion sau này, cập nhật theo run.html mới.
+        var pxtConfig = {
+            "relprefix": "/",
+            "verprefix": "",
+            "workerjs": "/worker.js",
+            "monacoworkerjs": "/monacoworker.js",
+            "gifworkerjs": "/gifjs/gif.worker.js",
+            "serviceworkerjs": "/serviceworker.js",
+            "typeScriptWorkerJs": "/tsworker.js",
+            "pxtVersion": "12.2.21",
+            "pxtRelId": "localDirRelId",
+            "pxtCdnUrl": "/",
+            "commitCdnUrl": "/",
+            "blobCdnUrl": "/",
+            "cdnUrl": "/",
+            "targetVersion": "0.0.0",
+            "targetRelId": "",
+            "targetUrl": "",
+            "targetId": "arcade",
+            "simUrl": "/simulator.html",
+            "simserviceworkerUrl": "/simulatorserviceworker.js",
+            "simworkerconfigUrl": "/workerConfig.js",
+            "partsUrl": "/siminstructions.html",
+            "runUrl": "/run.html",
+            "docsUrl": "/docs.html",
+            "multiUrl": "/multi.html",
+            "asseteditorUrl": "/asseteditor.html",
+            "isStatic": true,
+            "kioskUrl": "/kiosk.html",
+            "teachertoolUrl": "/teachertool.html",
+            "tutorialtoolUrl": "/tutorialtool.html",
+            "skillmapUrl": "/skillmap.html",
+            "multiplayerUrl": "/multiplayer.html",
+            "authcodeUrl": "/authcode.html"
+        };
+        // QUAN TRỌNG: embed.js gọi pxt.setupWebConfig(window.pxtWebConfig).
+        // Phải set ĐÚNG biến này, nếu không runner rơi về config default
+        // (simUrl "/sim/simulator.html", cdnUrl "/cdn/") -> sai và trắng trang.
+        window.pxtWebConfig = pxtConfig;
+
+        // Stub các global mà scriptPage.js mong đợi (bình thường do server include)
+        window.pxtTickEvent = window.pxtTickEvent || function () {};
+        window.pxtTargetConfigPromise = window.pxtTargetConfigPromise || Promise.resolve(undefined);
+    </script>
+
+    <script type="text/javascript" src="/embed.js"></script>
+    <script type="text/javascript" src="/scriptPage.js"></script>
+    <script>
+        (function () {
+            function getId() {
+                var m = location.pathname.match(/\/(_[A-Za-z0-9]{6,40})\/?$/);
+                if (m) return m[1];
+                var q = new URLSearchParams(location.search).get("id");
+                if (q && /^_?[A-Za-z0-9]{6,40}$/.test(q)) return q[0] === "_" ? q : "_" + q;
+                return null;
+            }
+
+            var id = getId();
+            var loader = document.getElementById("loader");
+            if (!id) {
+                if (loader) loader.textContent = "Không tìm thấy mã dự án.";
+                return;
+            }
+
+            // Khi chạy ở localhost, editor mặc định trỏ API về makecode.com.
+            // Thêm cờ nolocalhost=1 để editor dùng /api (qua proxy) -> test local OK.
+            // Trên production URL vẫn sạch (không cần cờ).
+            var isLocal = /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
+            var vs = isLocal ? "?nolocalhost=1" : "";
+
+            // editCodeButton -> mở trình soạn thảo đầy đủ
+            document.getElementById("editCodeButton").setAttribute("href", "/" + vs + "#pub:" + id);
+            document.getElementById("editCodeButton-overflow").setAttribute("href", "/" + vs + "#pub:" + id);
+
+            function start(info) {
+                // Ép runner tải project từ /api cùng origin (mặc định khi chạy ở
+                // localhost pxt trỏ về makecode.com -> không thấy project của ta).
+                try {
+                    if (window.pxt && pxt.Cloud) pxt.Cloud.apiRoot = location.origin + "/api/";
+                } catch (e) { /* bỏ qua */ }
+
+                var name = (info && info.name) || "GameLab";
+                var desc = (info && info.description) || "";
+                document.title = name;
+                document.getElementById("project-title").textContent = name;
+                document.getElementById("description-modal-content").textContent = desc;
+                // versionSuffix được scriptPage.js dùng để dựng URL "Xem code"
+                // (#sandbox). Truyền cờ nolocalhost ở local để iframe code dùng /api.
+                window.initScriptPage({
+                    projectId: id,
+                    name: name,
+                    description: desc,
+                    versionSuffix: vs
+                });
+            }
+
+            // Lấy metadata trước rồi khởi tạo trang (giống pubinfo của server)
+            fetch("/api/" + id)
+                .then(function (r) { return r.ok ? r.json() : null; })
+                .then(function (info) { start(info); })
+                .catch(function () { start(null); });
+        })();
+    </script>
+</body>
+
+</html>

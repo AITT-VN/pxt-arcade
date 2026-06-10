@@ -50,6 +50,12 @@ if exist "built\packaged\docs\test" rmdir /s /q "built\packaged\docs\test"
 echo Cleaned up graveyard and test docs.
 echo.
 
+REM Step 4b: Copy trang player chia se (phuc vu cho URL /_id)
+echo Copying share player page (play.html)...
+copy /Y "%~dp0share-play\play.html" "built\packaged\play.html" >nul
+echo play.html copied.
+echo.
+
 REM Step 5: Create /static/ mapping for deployment
 REM For local testing with http-server: use junction link
 REM For AWS S3 + CloudFront: use CloudFront Function to rewrite /static/ -> /docs/static/

@@ -1,0 +1,148 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  GameLab (OhStem MakeCode Arcade) - dịch vụ chia sẻ dự án.
+  Implement contract sharing của pxt: POST /api/scripts, GET /api/{id}, GET /api/{id}/text, GET /api/{id}/thumb.
+
+Parameters:
+  Stage:
+    Type: String
+    Default: prod
+    Description: Tên stage cho API Gateway.
+  RetentionDays:
+    Type: Number
+    Default: 0
+    Description: >
+      Số ngày giữ project ẩn danh trước khi tự xoá (TTL). 0 = giữ vĩnh viễn.
+  MaxBodyBytes:
+    Type: Number
+    Default: 3145728
+    Description: Giới hạn kích thước payload POST (mặc định 3MB).
+  AssetsBucketName:
+    Type: String
+    Default: ohstem-public
+    Description: Bucket S3 có sẵn dùng để lưu file project + thumbnail.
+  AssetsPrefix:
+    Type: String
+    Default: gamelab-projects/
+    Description: Tiền tố (folder) trong bucket để lưu asset. Phải kết thúc bằng "/".
+
+Globals:
+  Function:
+    Runtime: nodejs20.x
+    Architectures:
+      - arm64
+    MemorySize: 256
+    Timeout: 15
+    Tracing: Active
+
+Resources:
+  ScriptsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Sub "gamelab-shared-scripts-${Stage}"
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: id
+          AttributeType: S
+      KeySchema:
+        - AttributeName: id
+          KeyType: HASH
+      TimeToLiveSpecification:
+        AttributeName: expireAt
+        Enabled: true
+      PointInTimeRecoverySpecification:
+        PointInTimeRecoveryEnabled: true
+
+  # Lưu nội dung file project + thumbnail vào bucket ohstem-public có sẵn,
+  # dưới prefix gamelab-projects/. Bucket không được tạo/quản lý bởi stack này.
+
+  ShareApi:
+    Type: AWS::Serverless::HttpApi
+    Properties:
+      StageName: !Ref Stage
+      CorsConfiguration:
+        AllowOrigins:
+          - "*"
+        AllowMethods:
+          - GET
+          - POST
+          - OPTIONS
+        AllowHeaders:
+          - content-type
+          - content-encoding
+          - authorization
+        MaxAge: 600
+      # Bảo vệ chống spam ở mức gateway.
+      DefaultRouteSettings:
+        ThrottlingBurstLimit: 50
+        ThrottlingRateLimit: 20
+
+  ShareFunction:
+    Type: AWS::Serverless::Function
+    Metadata:
+      BuildMethod: esbuild
+      BuildProperties:
+        Minify: true
+        Target: es2022
+        Sourcemap: false
+        EntryPoints:
+          - src/handler.ts
+    Properties:
+      Handler: handler.handler
+      Environment:
+        Variables:
+          SCRIPTS_TABLE: !Ref ScriptsTable
+          ASSETS_BUCKET: !Ref AssetsBucketName
+          ASSETS_PREFIX: !Ref AssetsPrefix
+          RETENTION_DAYS: !Ref RetentionDays
+          MAX_BODY_BYTES: !Ref MaxBodyBytes
+          TARGET_ID: arcade
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref ScriptsTable
+        # Chỉ cấp quyền trên đúng prefix gamelab-projects/ của bucket có sẵn.
+        - Statement:
+            - Effect: Allow
+              Action:
+                - s3:GetObject
+                - s3:PutObject
+              Resource: !Sub "arn:aws:s3:::${AssetsBucketName}/${AssetsPrefix}*"
+      Events:
+        CreateScript:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref ShareApi
+            Path: /api/scripts
+            Method: POST
+        GetScript:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref ShareApi
+            Path: /api/{id}
+            Method: GET
+        GetScriptText:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref ShareApi
+            Path: /api/{id}/text
+            Method: GET
+        GetScriptThumb:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref ShareApi
+            Path: /api/{id}/thumb
+            Method: GET
+
+Outputs:
+  ApiEndpoint:
+    Description: Base URL của API chia sẻ (đặt làm origin cho behavior /api/* trên CloudFront).
+    Value: !Sub "https://${ShareApi}.execute-api.${AWS::Region}.amazonaws.com/${Stage}"
+  ApiId:
+    Description: HTTP API id.
+    Value: !Ref ShareApi
+  ScriptsTableName:
+    Value: !Ref ScriptsTable
+  AssetsLocation:
+    Description: Nơi lưu file project + thumbnail.
+    Value: !Sub "s3://${AssetsBucketName}/${AssetsPrefix}"
